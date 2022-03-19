@@ -26,7 +26,7 @@ swd_info() {
     "steps": [
         {
             "name": "build",
-            "artifacts": {
+            "modifies": {
                 "/rootfs-src": ""
             }
         }

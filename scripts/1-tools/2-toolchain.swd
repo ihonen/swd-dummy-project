@@ -56,25 +56,25 @@ swd_info() {
     "steps": [
         {
             "name": "source",
-            "artifacts": {
+            "modifies": {
                 "src-dir": ""
             }
         },
         {
             "name": "configure",
-            "artifacts": {
+            "modifies": {
                 "src-dir": ""
             }
         },
         {
             "name": "build",
-            "artifacts": {
+            "modifies": {
                 "src-dir": ""
             }
         },
         {
             "name": "install",
-            "artifacts": {
+            "modifies": {
                 "/1-tools/toolchain": "",
                 "/1-tools/sysroot-user-libs": ""
             }
