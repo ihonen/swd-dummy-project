@@ -1,0 +1,36 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=meta
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+build()
+{
+    rm -rf $SDP_ROOTFS_SRC
+    cp -r $SDP_SYSROOT $SDP_ROOTFS_SRC
+
+    mkdir -p $SDP_ROOTFS_SRC/apps
+}
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "steps": [
+        {
+            "name": "build",
+            "artifacts": {
+                "/rootfs-src": ""
+            }
+        }
+    ]
+}
+EOF
+}

@@ -1,0 +1,31 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=meta
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "artifacts": {
+        "toolchain": {
+            "type": "directory",
+            "path": "$SDP_TOOLCHAIN",
+            "exclude": [
+                "$SDP_SYSROOT_USER_LIBS"
+            ]
+        },
+        "sysroot-user-libs": {
+            "type": "directory",
+            "path": "$SDP_SYSROOT_USER_LIBS"
+        }
+    }
+}
+EOF
+}

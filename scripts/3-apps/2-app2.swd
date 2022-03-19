@@ -1,0 +1,100 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=app2
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+VERSION="1.0"
+
+# ------------------------------------------------------------------------------
+
+download()
+{
+    mkdir -p $SDP_PKG_STORAGE
+    echo $SDP_PKG src $VERSION > $SDP_PKG_STORAGE/src
+}
+
+source()
+{
+    mkdir -p $SDP_PKG_SRC
+    cp $SDP_PKG_STORAGE/* $SDP_PKG_SRC
+}
+
+configure()
+{
+    echo $SDP_PKG config $VERSION > $SDP_PKG_SRC/config
+}
+
+build()
+{
+    echo $SDP_PKG build $VERSION > $SDP_PKG_SRC/build
+}
+
+install()
+{
+    cp $SDP_PKG_SRC/build $SDP_ROOTFS_SRC/apps/$SDP_PKG
+}
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "artifacts": {
+        "src-pkg": {
+            "type": "directory",
+            "path": "$SDP_PKG_STORAGE"
+        },
+        "src-dir": {
+            "type": "directory",
+            "path": "$SDP_PKG_SRC"
+        }
+    },
+    "steps": [
+        {
+            "name": "download",
+            "artifacts": {
+                "src-pkg": ""
+            },
+            "dependencies": [
+                {
+                    "id": "version",
+                    "type": "data",
+                    "data": "$VERSION"
+                }
+            ]
+        },
+        {
+            "name": "source",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "configure",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "build",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "install",
+            "artifacts": {
+                "/rootfs-src": "aggregate"
+            }
+        }
+    ]
+}
+EOF
+}

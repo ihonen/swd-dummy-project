@@ -1,0 +1,43 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=meta
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+build()
+{
+    rm -f $SDP_ROOTFS_IMG
+
+    for ENTRY in `find $SDP_ROOTFS_SRC`; do
+        echo $ENTRY >> $SDP_ROOTFS_IMG
+    done
+}
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "steps": [
+        {
+            "name": "build",
+            "artifacts": {
+                "/rootfs-img": ""
+            },
+            "dependencies": [
+                {
+                    "id": "/rootfs-src",
+                    "type": "artifact"
+                }
+            ]
+        }
+    ]
+}
+EOF
+}

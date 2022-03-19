@@ -1,0 +1,28 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=meta
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "rules": {
+        "build": {
+            "dependencies": [
+                {
+                    "id": "/1-tools/toolchain",
+                    "type": "artifact"
+                }
+            ]
+        }
+    }
+}
+EOF
+}

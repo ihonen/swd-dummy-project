@@ -1,0 +1,85 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=toolchain
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+VERSION="1.0"
+
+# ------------------------------------------------------------------------------
+
+source()
+{
+    rm -rf $SDP_PKG_SRC
+    mkdir -p $SDP_PKG_SRC
+
+    echo $SDP_PKG src $VERSION > $SDP_PKG_SRC/src
+}
+
+configure()
+{
+    echo $SDP_PKG config $VERSION > $SDP_PKG_SRC/config
+}
+
+build()
+{
+    echo $SDP_PKG build $VERSION > $SDP_PKG_SRC/build
+}
+
+install()
+{
+    rm -rf $SDP_TOOLCHAIN
+    mkdir -p $SDP_SYSROOT_DEFAULT_LIBS
+    mkdir -p $SDP_SYSROOT_USER_LIBS
+
+    cp $SDP_PKG_SRC/build $SDP_TOOLCHAIN/executable
+    cp $SDP_PKG_SRC/build $SDP_SYSROOT_DEFAULT_LIBS/lib0
+}
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "artifacts": {
+        "src-dir": {
+            "type": "directory",
+            "path": "$SDP_PKG_SRC"
+        }
+    },
+    "steps": [
+        {
+            "name": "source",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "configure",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "build",
+            "artifacts": {
+                "src-dir": ""
+            }
+        },
+        {
+            "name": "install",
+            "artifacts": {
+                "/1-tools/toolchain": "",
+                "/1-tools/sysroot-user-libs": ""
+            }
+        }
+    ]
+}
+EOF
+}

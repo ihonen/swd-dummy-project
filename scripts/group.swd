@@ -1,0 +1,28 @@
+#!/bin/bash sdp_exec.sh
+
+set -e
+set -u
+
+# ------------------------------------------------------------------------------
+
+SDP_PKG=meta
+. sdp_env.ish
+
+# ------------------------------------------------------------------------------
+
+swd_info() {
+    cat <<EOF
+{
+    "artifacts": {
+        "rootfs-src": {
+            "type": "directory",
+            "path": "$SDP_ROOTFS_SRC"
+        },
+        "rootfs-img": {
+            "type": "file",
+            "path": "$SDP_ROOTFS_IMG"
+        }
+    }
+}
+EOF
+}

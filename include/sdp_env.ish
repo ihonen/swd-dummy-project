@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------------------
+
+export SDP_ROOT=$(readlink --canonicalize "$SWD_ROOT"/..)
+export SDP_OUT=$SDP_ROOT/out
+export SDP_STORAGE=$SDP_ROOT/storage
+export SDP_WORK=$SDP_ROOT/work
+
+# ------------------------------------------------------------------------------
+
+export SDP_PKG_STORAGE=$SDP_STORAGE/$SDP_PKG
+export SDP_PKG_WORK=$SDP_WORK/$SDP_PKG
+export SDP_PKG_SRC=$SDP_PKG_WORK/src
+
+# ------------------------------------------------------------------------------
+
+export SDP_TOOLCHAIN=$SDP_OUT/toolchain
+export SDP_SYSROOT=$SDP_TOOLCHAIN/sysroot
+export SDP_SYSROOT_DEFAULT_LIBS=$SDP_SYSROOT/default-libs
+export SDP_SYSROOT_USER_LIBS=$SDP_SYSROOT/user-libs
+
+# -----------------------------------------------------------------------------
+
+export SDP_ROOTFS_SRC=$SDP_OUT/rootfs-src
+export SDP_ROOTFS_IMG=$SDP_OUT/rootfs-img
+
+# ------------------------------------------------------------------------------
+
+export SDP_KERNEL_IMG=$SDP_OUT/kernel-img
