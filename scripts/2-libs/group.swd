@@ -15,7 +15,7 @@ swd_info() {
 {
     "rules": {
         "build": {
-            "dependencies": [
+            "depends": [
                 {
                     "id": "/1-tools/toolchain",
                     "type": "artifact"

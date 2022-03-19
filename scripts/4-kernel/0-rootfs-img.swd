@@ -30,7 +30,7 @@ swd_info() {
             "modifies": {
                 "/rootfs-img": ""
             },
-            "dependencies": [
+            "depends": [
                 {
                     "id": "/rootfs-src",
                     "type": "artifact"

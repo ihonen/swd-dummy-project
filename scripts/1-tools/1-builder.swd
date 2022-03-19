@@ -61,7 +61,7 @@ swd_info() {
             "modifies": {
                 "src-pkg": ""
             },
-            "dependencies": [
+            "depends": [
                 {
                     "id": "version",
                     "type": "data",
